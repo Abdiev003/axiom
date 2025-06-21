@@ -30,7 +30,7 @@ npm install -g axiom
 ### Local Development Setup
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/axiom.git
+git clone https://github.com/Abdiev003/axiom.git
 cd axiom
 
 # Install dependencies
@@ -259,9 +259,9 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 🐛 [Report Issues](https://github.com/yourusername/axiom/issues)
-- 💬 [Discussions](https://github.com/yourusername/axiom/discussions)
-- 📧 Email: your-email@example.com
+- 🐛 [Report Issues](https://github.com/Abdiev003/axiom/issues)
+- 💬 [Discussions](https://github.com/Abdiev003/axiom/discussions)
+- 📧 Email: aliabdiyev000@gmail.com
 
 ---
 
