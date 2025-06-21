@@ -12,10 +12,7 @@
 [![CI](https://github.com/Abdiev003/git-axiom/actions/workflows/ci.yml/badge.svg)](https://github.com/Abdiev003/git-axiom/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/Abdiev003/git-axiom/actions/workflows/codeql.yml/badge.svg)](https://github.com/Abdiev003/git-axiom/actions/workflows/codeql.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Abdiev003/git-axiom/badge.svg?branch=main)](https://coveralls.io/github/Abdiev003/git-axiom?branch=main)
-[![Maintainability](https://api.codeclimate.com/v1/badges/git-axiom/maintainability)](https://codeclimate.com/github/Abdiev003/git-axiom/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/Abdiev003/git-axiom/badge.svg)](https://snyk.io/test/github/Abdiev003/git-axiom)
-
-![Git Axiom Demo](https://raw.githubusercontent.com/Abdiev003/git-axiom/main/assets/demo.gif)
 
 </div>
 

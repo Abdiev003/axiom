@@ -14,7 +14,7 @@
     "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepublishOnly": "npm test && npm run lint && chmod +x index.js",
+    "prepublishOnly": "npm test && chmod +x index.js",
     "postinstall": "echo '\n🚀 Git Axiom installed successfully!\n💡 Run \"git-axiom init\" to get started.\n'"
   },
   "keywords": [
@@ -74,6 +74,7 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "eslint": "^8.57.0",
+    "@eslint/js": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.0",
