@@ -1,6 +1,6 @@
 {
   "name": "git-axiom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "🚀 AI-powered CLI tool that generates professional Git commit messages using OpenAI GPT. Analyze staged changes and create conventional commits automatically.",
   "main": "index.js",
   "type": "module",
