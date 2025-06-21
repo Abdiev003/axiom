@@ -1,6 +1,6 @@
 {
   "name": "git-axiom",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "🚀 AI-powered CLI tool that generates professional Git commit messages using OpenAI GPT. Analyze staged changes and create conventional commits automatically.",
   "main": "index.js",
   "type": "module",
@@ -9,8 +9,13 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": "chmod +x index.js"
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch", 
+    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm test && npm run lint && chmod +x index.js",
+    "postinstall": "echo '\n🚀 Git Axiom installed successfully!\n💡 Run \"git-axiom init\" to get started.\n'"
   },
   "keywords": [
     "cli",
@@ -32,7 +37,7 @@
   ],
   "author": {
     "name": "Ali Abdiyev",
-    "email": "ali.abdiyev@example.com",
+    "email": "aliabdiyev000@gmail.com",
     "url": "https://github.com/Abdiev003"
   },
   "license": "ISC",
@@ -50,8 +55,12 @@
   "files": [
     "index.js",
     "utils/",
+    "tests/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "CHANGELOG.md"
   ],
   "dependencies": {
     "axios": "^1.10.0",
@@ -62,5 +71,23 @@
     "ora": "^8.2.0"
   },
   "peerDependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "@jest/globals": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "collectCoverageFrom": [
+      "utils/*.js",
+      "index.js",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": ["text", "lcov", "html"]
+  }
 }
