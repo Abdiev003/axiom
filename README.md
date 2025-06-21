@@ -2,7 +2,7 @@
 
 > An AI-powered CLI tool to supercharge your Git workflows with intelligent commit messages
 
-[![npm version](https://badge.fury.io/js/axiom.svg)](https://badge.fury.io/js/axiom)
+[![npm version](https://badge.fury.io/js/git-axiom.svg)](https://badge.fury.io/js/git-axiom)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
 
@@ -22,16 +22,16 @@
 - Git repository
 - OpenAI API key
 
-### Install via npm (when published)
+### Install via npm
 ```bash
-npm install -g axiom
+npm install -g git-axiom
 ```
 
 ### Local Development Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Abdiev003/axiom.git
-cd axiom
+git clone https://github.com/Abdiev003/git-axiom.git
+cd git-axiom
 
 # Install dependencies
 npm install
@@ -59,9 +59,9 @@ export OPENAI_API_KEY="your-openai-api-key-here"
 export OPENAI_API_KEY="sk-..."
 ```
 
-### 3. Initialize Axiom
+### 3. Initialize Git Axiom
 ```bash
-axiom init
+git-axiom init
 ```
 
 ## 🚀 Usage
@@ -77,7 +77,7 @@ git add specific-file.js
 
 2. **Generate AI commit message**
 ```bash
-axiom commit
+git-axiom commit
 ```
 
 3. **Review and confirm**
@@ -90,7 +90,7 @@ The tool will:
 ### Example Session
 ```bash
 $ git add src/auth.js
-$ axiom commit
+$ git-axiom commit
 
 ⠋ Analyzing staged files...
 ⠋ Generating commit message with AI...
@@ -109,11 +109,11 @@ $ axiom commit
 
 ## 📋 Commands
 
-### `axiom commit`
+### `git-axiom commit`
 Generate AI-powered commit messages for staged changes.
 
 ```bash
-axiom commit
+git-axiom commit
 ```
 
 **What it does:**
@@ -123,20 +123,20 @@ axiom commit
 4. Asks for your confirmation
 5. Commits the changes if approved
 
-### `axiom init`
-Initialize Axiom and check setup.
+### `git-axiom init`
+Initialize Git Axiom and check setup.
 
 ```bash
-axiom init
+git-axiom init
 ```
 
-### `axiom --help`
+### `git-axiom --help`
 Show help information and available commands.
 
 ```bash
-axiom --help
+git-axiom --help
 # or
-axiom -h
+git-axiom -h
 ```
 
 ## 🎯 Conventional Commits
@@ -235,14 +235,14 @@ We welcome contributions! Please follow these steps:
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Add tests if applicable
-5. Commit using Axiom (`axiom commit` 😉)
+5. Commit using Git Axiom (`git-axiom commit` 😉)
 6. Push to your branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
 
 ### Development Setup
 ```bash
-git clone https://github.com/Abdiev003/axiom.git
-cd axiom
+git clone https://github.com/Abdiev003/git-axiom.git
+cd git-axiom
 npm install
 npm link  # For global testing
 ```
@@ -259,8 +259,8 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 🐛 [Report Issues](https://github.com/Abdiev003/axiom/issues)
-- 💬 [Discussions](https://github.com/Abdiev003/axiom/discussions)
+- 🐛 [Report Issues](https://github.com/Abdiev003/git-axiom/issues)
+- 💬 [Discussions](https://github.com/Abdiev003/git-axiom/discussions)
 - 📧 Email: aliabdiyev000@gmail.com
 
 ---

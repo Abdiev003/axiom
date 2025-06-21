@@ -15,7 +15,7 @@ const execAsync = promisify(exec);
 const program = new Command();
 
 program
-  .name("axiom")
+  .name("git-axiom")
   .description("An AI-powered tool to help with Git workflows")
   .version(packageJson.version);
 
@@ -102,13 +102,13 @@ program
 
 program
   .command("init")
-  .description("Initialize Axiom in your Git repository")
+  .description("Initialize Git Axiom in your Git repository")
   .action(() => {
-    console.log("🚀 Initializing Axiom...");
+    console.log("🚀 Initializing Git Axiom...");
     console.log("💡 Make sure to set your OpenAI API key:");
     console.log('   export OPENAI_API_KEY="your-api-key-here"');
     console.log(
-      '\n✅ Axiom is ready! Use "axiom commit" to generate AI-powered commit messages.'
+      '\n✅ Git Axiom is ready! Use "git-axiom commit" to generate AI-powered commit messages.'
     );
   });
 
@@ -117,7 +117,7 @@ program
   .description("Get AI-powered code review suggestions")
   .action(() => {
     console.log("🔍 Code review feature coming soon...");
-    console.log('💡 For now, use "axiom commit" to generate commit messages.');
+    console.log('💡 For now, use "git-axiom commit" to generate commit messages.');
   });
 
 program.parse(process.argv);

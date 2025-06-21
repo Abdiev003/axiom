@@ -1,24 +1,58 @@
 {
-  "name": "axiom",
+  "name": "git-axiom",
   "version": "1.0.0",
-  "description": "An AI-powered tool to help with Git workflows",
+  "description": "🚀 AI-powered CLI tool that generates professional Git commit messages using OpenAI GPT. Analyze staged changes and create conventional commits automatically.",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "axiom": "./index.js"
+    "git-axiom": "./index.js"
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "chmod +x index.js"
   },
   "keywords": [
     "cli",
     "git",
     "ai",
-    "workflow"
+    "openai",
+    "gpt",
+    "commit-messages",
+    "conventional-commits",
+    "nodejs",
+    "automation",
+    "developer-tools",
+    "workflow",
+    "javascript",
+    "git-workflow",
+    "ai-tools",
+    "command-line",
+    "productivity"
   ],
-  "author": "",
+  "author": {
+    "name": "Ali Abdiyev",
+    "email": "ali.abdiyev@example.com",
+    "url": "https://github.com/Abdiev003"
+  },
   "license": "ISC",
+  "homepage": "https://github.com/Abdiev003/git-axiom#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abdiev003/git-axiom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Abdiev003/git-axiom/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.js",
+    "utils/",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {
     "axios": "^1.10.0",
     "chalk": "^5.4.1",
@@ -26,5 +60,7 @@
     "dotenv": "^16.5.0",
     "inquirer": "^12.6.3",
     "ora": "^8.2.0"
-  }
+  },
+  "peerDependencies": {},
+  "devDependencies": {}
 }
