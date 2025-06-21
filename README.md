@@ -1,4 +1,4 @@
-# 🚀 Axiom
+# 🚀 Git Axiom
 
 > An AI-powered CLI tool to supercharge your Git workflows with intelligent commit messages
 
