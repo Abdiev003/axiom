@@ -1,0 +1,18 @@
+# Global code owners
+* @Abdiev003
+
+# Specific areas
+/utils/ @Abdiev003
+/tests/ @Abdiev003
+package.json @Abdiev003
+README.md @Abdiev003
+CHANGELOG.md @Abdiev003
+
+# CI/CD and configuration files
+/.github/ @Abdiev003
+eslint.config.js @Abdiev003
+.gitignore @Abdiev003
+
+# Security and contribution files
+SECURITY.md @Abdiev003
+CONTRIBUTING.md @Abdiev003 

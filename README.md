@@ -277,7 +277,7 @@ axiom/
 | Conventional Commits | ✅ | ❌ | ⚠️ |
 | Interactive CLI | ✅ | ❌ | ⚠️ |
 | Error Handling | ✅ | ❌ | ⚠️ |
-| Free to Use | ✅ | ✅ | ❌ |
+| Free to Use | ❌ | ✅ | ❌ |
 | Offline Mode | ❌ | ✅ | ❌ |
 
 ## 🚀 Performance
