@@ -2,9 +2,9 @@
 
 import { Command } from "commander";
 import { createRequire } from "module";
-import { getStagedDiff } from "./utils/git.js";
-import { generateCommitMessage } from "./utils/ai.js";
-import { startSpinner, succeedSpinner, confirmCommit } from "./utils/ui.js";
+import { getStagedDiff, getCurrentBranch, getGitDiff } from "./utils/git.js";
+import { generateCommitMessage, generateBranchName } from "./utils/ai.js";
+import { startSpinner, succeedSpinner, confirmCommit, confirmBranch } from "./utils/ui.js";
 import { exec } from "child_process";
 import { promisify } from "util";
 
@@ -94,6 +94,84 @@ program
         error.message.includes("timeout")
       ) {
         console.log("\n💡 Check your internet connection and try again.");
+      }
+
+      process.exit(1);
+    }
+  });
+
+program
+  .command("branch")
+  .description("Generate AI-powered branch names based on your changes")
+  .option("-t, --type <type>", "branch type (feature, fix, hotfix, refactor, docs)", "feature")
+  .action(async (options) => {
+    let spinner;
+
+    try {
+      // Step 1: Get current branch to avoid conflicts
+      const currentBranch = await getCurrentBranch();
+      
+      if (currentBranch !== "main" && currentBranch !== "master" && currentBranch !== "develop") {
+        console.log(`⚠️  You are currently on branch "${currentBranch}"`);
+        console.log("💡 Consider switching to main/master/develop before creating a new branch");
+      }
+
+      // Step 2: Analyze changes
+      spinner = startSpinner("Analyzing your changes...");
+
+      // Get both staged and unstaged changes for better context
+      const { staged, unstaged } = await getGitDiff();
+      const allChanges = staged || unstaged;
+
+      if (!allChanges) {
+        if (spinner) spinner.fail("No changes found to analyze.");
+        console.log('\n💡 Make some changes to your code first, then run this command.');
+        return;
+      }
+
+      // Step 3: Generate branch name with AI
+      spinner.text = "Generating branch name with AI...";
+      
+      const branchName = await generateBranchName(allChanges, options.type);
+
+      // Step 4: Show result and ask for confirmation
+      succeedSpinner(spinner, "Branch name generated!");
+      spinner = null;
+
+      const shouldCreate = await confirmBranch(branchName, options.type);
+
+      if (shouldCreate) {
+        // Step 5: Create the branch
+        const createSpinner = startSpinner("Creating new branch...");
+
+        try {
+          await execAsync(`git checkout -b ${branchName}`);
+          succeedSpinner(createSpinner, "Branch created successfully!");
+          console.log(`\n✨ Successfully created and switched to branch: "${branchName}"`);
+          console.log(`💡 You can now make your changes and use "git-axiom commit" when ready!`);
+        } catch (branchError) {
+          createSpinner.fail("Branch creation failed");
+          throw new Error(`Git branch creation failed: ${branchError.message}`);
+        }
+      } else {
+        console.log("\n❌ Branch creation cancelled.");
+        console.log(`💡 Suggested branch name was: "${branchName}"`);
+      }
+    } catch (error) {
+      if (spinner) {
+        spinner.fail("Operation failed");
+      }
+
+      console.error("\n🚨 Error:", error.message);
+
+      // Provide helpful suggestions based on error type
+      if (error.message.includes("API key")) {
+        console.log("\n💡 Please set your OpenAI API key:");
+        console.log('   export OPENAI_API_KEY="your-api-key-here"');
+      } else if (error.message.includes("not a git repository")) {
+        console.log("\n💡 Make sure you are in a Git repository directory.");
+      } else if (error.message.includes("already exists")) {
+        console.log("\n💡 A branch with this name already exists. Try a different approach or rename manually.");
       }
 
       process.exit(1);

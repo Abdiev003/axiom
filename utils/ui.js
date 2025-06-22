@@ -46,4 +46,28 @@ export async function confirmCommit(commitMessage) {
   ]);
 
   return confirmed;
+}
+
+/**
+ * Ask user for confirmation to create a new branch with the generated name
+ * @param {string} branchName - AI-generated branch name to display and confirm
+ * @param {string} branchType - Type of branch (feature, fix, etc.)
+ * @returns {Promise<boolean>} True if user confirms, false otherwise
+ */
+export async function confirmBranch(branchName, branchType) {
+  console.log(chalk.bold('\n🌟 Generated branch name:'));
+  console.log(chalk.cyan(`${branchName}`));
+  console.log(chalk.gray(`Type: ${branchType}`));
+  console.log();
+
+  const { confirmed } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'confirmed',
+      message: 'Do you want to create this branch and switch to it?',
+      default: true
+    }
+  ]);
+
+  return confirmed;
 } 

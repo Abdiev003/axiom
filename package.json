@@ -1,7 +1,7 @@
 {
   "name": "git-axiom",
-  "version": "1.0.3",
-  "description": "🚀 AI-powered CLI tool that generates professional Git commit messages using OpenAI GPT. Analyze staged changes and create conventional commits automatically.",
+  "version": "1.1.0",
+  "description": "🚀 AI-powered CLI tool that generates professional Git commit messages and smart branch names using OpenAI GPT. Analyze changes and create conventional commits with intelligent branch naming automatically.",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -24,6 +24,7 @@
     "openai",
     "gpt",
     "commit-messages",
+    "branch-naming",
     "conventional-commits",
     "nodejs",
     "automation",
@@ -33,7 +34,9 @@
     "git-workflow",
     "ai-tools",
     "command-line",
-    "productivity"
+    "productivity",
+    "smart-branches",
+    "git-branching"
   ],
   "author": {
     "name": "Ali Abdiyev",

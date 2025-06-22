@@ -237,4 +237,145 @@ export async function generateCommitMessage(diff) {
   }
 }
 
+/**
+ * Generate a smart branch name based on git diff using OpenAI API
+ * @param {string} diff - Git diff output from current changes
+ * @param {string} branchType - Type of branch (feature, fix, hotfix, refactor, docs)
+ * @returns {Promise<string>} Generated branch name following Git conventions
+ * @throws {Error} When API key is missing, API request fails, or response is invalid
+ */
+export async function generateBranchName(diff, branchType = 'feature') {
+  const apiKey = process.env.OPENAI_API_KEY;
+  
+  if (!apiKey) {
+    throw new Error('OpenAI API key not found. Please set the OPENAI_API_KEY environment variable.');
+  }
+
+  if (!diff || diff.trim() === '') {
+    throw new Error('No diff provided. Please provide a valid git diff string.');
+  }
+
+  // Handle large diffs similar to commit message generation
+  let processedDiff = diff;
+  const estimatedTokens = estimateTokenCount(diff);
+  
+  if (estimatedTokens > 10000) {
+    processedDiff = summarizeDiff(diff);
+  } else if (estimatedTokens > 6000) {
+    processedDiff = truncateDiff(diff, 6000);
+  } else if (estimatedTokens > 4000) {
+    processedDiff = truncateDiff(diff, 4000);
+  }
+  
+  // Final safety check
+  const finalTokens = estimateTokenCount(processedDiff);
+  if (finalTokens > 8000) {
+    processedDiff = summarizeDiff(diff);
+  }
+
+  const systemPrompt = `You are an expert software developer who creates Git branch names. Your task is to analyze the given code changes (git diff) and generate a concise, descriptive branch name that follows Git branching conventions.
+
+Rules:
+- Generate ONLY the branch name part after the type prefix (e.g., "user-authentication-system" not "feature/user-authentication-system")
+- Use kebab-case (lowercase with hyphens)
+- Be descriptive but concise (2-4 words maximum)
+- Focus on the main feature/change being implemented
+- Avoid generic words like "update", "change", "modify"
+- Use specific technical terms when appropriate
+- No special characters except hyphens
+- Maximum 50 characters total
+
+Examples of good branch names:
+- "add-user-authentication"
+- "fix-memory-leak-issue"
+- "refactor-payment-service"
+- "update-api-documentation"`;
+
+  const userPrompt = `Branch type: ${branchType}
+Please analyze the following git diff and generate a branch name:
+
+${processedDiff}`;
+
+  try {
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: userPrompt
+          }
+        ],
+        max_tokens: 50,
+        temperature: 0.4,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        timeout: 30000
+      }
+    );
+
+    // Extract the branch name from the response
+    let branchSuffix = response.data?.choices?.[0]?.message?.content?.trim();
+    
+    if (!branchSuffix) {
+      throw new Error('Invalid response from OpenAI API: No branch name generated.');
+    }
+
+    // Clean up the branch name
+    branchSuffix = branchSuffix
+      .toLowerCase()
+      .replace(/[^a-z0-9\-\s]/g, '') // Remove special chars except hyphens and spaces
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+
+    // Ensure it's not too long
+    if (branchSuffix.length > 50) {
+      branchSuffix = branchSuffix.substring(0, 50).replace(/-[^-]*$/, '');
+    }
+
+    // Combine with branch type prefix
+    const fullBranchName = `${branchType}/${branchSuffix}`;
+
+    return fullBranchName;
+
+  } catch (error) {
+    // Handle different types of errors (similar to generateCommitMessage)
+    if (error.response) {
+      const status = error.response.status;
+      const errorMessage = error.response.data?.error?.message || 'Unknown API error';
+      
+      if (status === 401) {
+        throw new Error('Invalid OpenAI API key. Please check your OPENAI_API_KEY environment variable.');
+      } else if (status === 429) {
+        throw new Error('OpenAI API rate limit exceeded. Please try again later.');
+      } else if (status === 400 && errorMessage.includes('maximum context length')) {
+        throw new Error('The changes are too large to analyze. Please try with smaller changes.');
+      } else if (status >= 500) {
+        throw new Error('OpenAI API server error. Please try again later.');
+      } else {
+        throw new Error(`OpenAI API error (${status}): ${errorMessage}`);
+      }
+    } else if (error.code === 'ECONNABORTED') {
+      throw new Error('Request to OpenAI API timed out. Please check your internet connection and try again.');
+    } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+      throw new Error('Unable to connect to OpenAI API. Please check your internet connection.');
+    } else {
+      throw new Error(`Failed to generate branch name: ${error.message}`);
+    }
+  }
+}
+
  

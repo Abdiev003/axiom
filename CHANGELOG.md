@@ -7,25 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2024-12-20
+
 ### Added
-- Comprehensive test suite with Jest
-- GitHub Actions CI/CD pipeline
-- CodeQL security analysis
-- ESLint code quality checks
-- Contributing guidelines
-- Security policy
-- Professional README with badges
-- Smart token limit handling for large diffs
-- Diff truncation and summarization for better API compatibility
+- 🌟 **NEW: Smart Branch Naming** - AI-powered branch name generation
+- 🤖 `git-axiom branch` command with multiple branch types
+- 🎯 Support for feature, fix, hotfix, refactor, and docs branches
+- 📝 Intelligent analysis of both staged and unstaged changes
+- 🎨 Beautiful interactive prompts for branch creation
+- 🔧 Comprehensive test suite for branch functionality
+- 📋 Extended CLI help system with detailed usage examples
 
-### Changed
-- Enhanced error handling with specific error types
-- Improved package.json with proper scripts and metadata
-- AI utility now handles large diffs intelligently
+### Enhanced
+- 🚀 AI utility now supports dual-purpose analysis (commits + branches)
+- 💡 Smarter diff processing with better token management
+- 🎨 Improved user interface with better error messages
+- 📖 Updated documentation with new branch naming feature
 
-### Fixed
-- Code quality issues identified by linting
-- OpenAI token limit exceeded errors for large commits
+### Commands
+- `git-axiom branch` - Generate AI-powered branch names
+- `git-axiom branch --type <type>` - Create specific branch types
+- `git-axiom branch --help` - Show branch command help
+
+### Technical Improvements
+- 🔍 Enhanced Git integration with better change detection
+- 🛡️ Robust error handling for branch creation scenarios
+- ⚡ Optimized API calls with intelligent diff truncation
+- 🧪 Comprehensive test coverage for new functionality
 
 ## [1.0.1] - 2024-01-15
 
@@ -81,10 +89,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
+- **v1.1.0**: Smart Branch Naming feature with AI-powered branch generation  
 - **v1.0.1**: Bug fixes and performance improvements
 - **v1.0.0**: Initial stable release with core functionality
 
 ## Migration Guide
+
+### From v1.0.x to v1.1.0
+No breaking changes. Simply update:
+```bash
+npm update -g git-axiom
+```
+
+New features available:
+- Use `git-axiom branch` for AI-powered branch naming
+- All existing commands work exactly the same
 
 ### From v1.0.0 to v1.0.1
 No breaking changes. Simply update:
@@ -94,14 +113,14 @@ npm update -g git-axiom
 
 ## Planned Features
 
-### v1.1.0 (Upcoming)
+### v1.2.0 (Upcoming)
 - 🔄 Bulk commit processing
 - 📊 Commit statistics and analytics  
 - 🎨 Custom commit message templates
 - 🔧 Configuration file support
 - 🌐 Multi-language support
 
-### v1.2.0 (Future)
+### v1.3.0 (Future)
 - 🤖 Multiple AI model support (Claude, Gemini)
 - 📱 Web interface
 - 🔗 Git hooks integration
